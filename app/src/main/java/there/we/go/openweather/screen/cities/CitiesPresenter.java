@@ -20,6 +20,7 @@ public class CitiesPresenter {
     public void init() {
         mCitiesRepository.getCities()
                 .doOnSubscribe(subscription -> mCitiesView.showLoadingIndicator())
+                // TODO: subscription managing?
                 .doOnTerminate(mCitiesView::hideLoadingIndicator)
                 .subscribe(mCitiesView::showCities,
                         throwable -> mCitiesView.showError());

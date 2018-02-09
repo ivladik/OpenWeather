@@ -55,6 +55,7 @@ public class NetworkModule {
                 .build();
     }
 
+    // TODO: is there a need to inject realm? if yes - where?
     @Provides
     @Singleton
     Realm provideRealm() {
