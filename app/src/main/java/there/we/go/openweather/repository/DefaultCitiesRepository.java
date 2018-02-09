@@ -4,11 +4,13 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import there.we.go.openweather.BuildConfig;
 import there.we.go.openweather.api.CitiesService;
+import there.we.go.openweather.model.CitiesResponse;
 import there.we.go.openweather.model.City;
 
 /**
@@ -27,6 +29,7 @@ public class DefaultCitiesRepository implements CitiesRepository {
     @Override
     public Flowable<List<City>> getCities() {
         return mCitiesService.getWeather(BuildConfig.API_CITIES_IDS)
+                .map(CitiesResponse::getCities)
                 .flatMap(cities -> {
                     Realm.getDefaultInstance().executeTransaction(realm -> {
                         realm.delete(City.class);

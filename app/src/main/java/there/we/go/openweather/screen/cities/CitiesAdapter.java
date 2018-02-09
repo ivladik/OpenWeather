@@ -42,12 +42,16 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesHolder> {
 
     @Override
     public void onBindViewHolder(CitiesHolder holder, int position) {
+        City city = mCities.get(position);
+        holder.bind(city);
 
+        holder.itemView.setOnClickListener(mInternalListener);
+        holder.itemView.setTag(city);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mCities.size();
     }
 
     public interface OnItemClickListener {
