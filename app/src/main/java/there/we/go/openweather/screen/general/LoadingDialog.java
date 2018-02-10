@@ -24,7 +24,7 @@ import there.we.go.openweather.R;
  */
 
 public class LoadingDialog extends DialogFragment {
-
+    // TODO: fix screen rotation
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
 
     public static LoadingView view(FragmentManager fm) {
@@ -32,13 +32,14 @@ public class LoadingDialog extends DialogFragment {
     }
 
     public static LoadingView view(Fragment fragment) {
-        return new LoadingDialogView(fragment.getFragmentManager());
+        return view(fragment.getFragmentManager());
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NO_TITLE, getTheme());
+        setCancelable(false);
     }
 
     @NonNull
