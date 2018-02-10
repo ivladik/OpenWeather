@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,19 +22,17 @@ import there.we.go.openweather.repository.CitiesRepository;
 import there.we.go.openweather.screen.general.LoadingDialog;
 import there.we.go.openweather.screen.general.LoadingView;
 
-public class CitiesActivity extends AppCompatActivity implements CitiesView, CitiesAdapter.OnItemClickListener {
-    // TODO: Inject Presenter, apply Moxy
+public class CitiesActivity extends MvpAppCompatActivity implements CitiesView, CitiesAdapter.OnItemClickListener {
+    // TODO: Inject Presenter
     private LoadingView mLoadingView;
-
-    @Inject
-    CitiesRepository mCitiesRepository;
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
     CitiesAdapter mCitiesAdapter;
 
-    private CitiesPresenter mCitiesPresenter;
+    @InjectPresenter
+    CitiesPresenter mCitiesPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,8 @@ public class CitiesActivity extends AppCompatActivity implements CitiesView, Cit
         mCitiesAdapter = new CitiesAdapter(this);
         mRecyclerView.setAdapter(mCitiesAdapter);
 
-        WeatherApp.getAppComponent().injectCitiesActivity(this);
-
         mLoadingView = LoadingDialog.view(getSupportFragmentManager());
 
-        mCitiesPresenter = new CitiesPresenter(this, mCitiesRepository);
         mCitiesPresenter.init();
     }
 
