@@ -3,7 +3,6 @@ package there.we.go.openweather.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import there.we.go.openweather.screen.cities.CitiesActivity;
 import there.we.go.openweather.screen.cities.CitiesPresenter;
 
 /**
@@ -11,7 +10,7 @@ import there.we.go.openweather.screen.cities.CitiesPresenter;
  */
 
 @Singleton
-@Component(modules = {NetworkModule.class})
+@Component(modules = {AppModule.class})
 public interface AppComponent {
 
     void injectCitiesPresenter(CitiesPresenter citiesPresenter);

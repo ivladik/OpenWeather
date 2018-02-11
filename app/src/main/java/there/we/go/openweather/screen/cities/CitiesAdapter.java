@@ -35,6 +35,11 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesHolder> {
         notifyDataSetChanged();
     }
 
+    public void clear() {
+        mCities.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public CitiesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return CitiesHolder.create(parent.getContext());

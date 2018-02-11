@@ -99,7 +99,7 @@ public class LoadingDialog extends DialogFragment {
                 if (dialog != null) {
                     dialog.dismissAllowingStateLoss();
                 } else if (--mAttempts >= 0) {
-                    HANDLER.postDelayed(this, 3000);
+                    HANDLER.postDelayed(this, 300);
                 }
             }
         }

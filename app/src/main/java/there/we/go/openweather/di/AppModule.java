@@ -20,7 +20,7 @@ import there.we.go.openweather.repository.DefaultCitiesRepository;
  * @author Vladislav Falzan.
  */
 @Module
-public class NetworkModule {
+public class AppModule {
 
     @Provides
     @Singleton

@@ -1,6 +1,5 @@
 package there.we.go.openweather.screen.cities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,14 +10,10 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import there.we.go.openweather.R;
-import there.we.go.openweather.WeatherApp;
 import there.we.go.openweather.model.City;
-import there.we.go.openweather.repository.CitiesRepository;
 import there.we.go.openweather.screen.general.LoadingDialog;
 import there.we.go.openweather.screen.general.LoadingView;
 
@@ -67,11 +62,11 @@ public class CitiesActivity extends MvpAppCompatActivity implements CitiesView, 
 
     @Override
     public void showError() {
-        // A stub
+        mCitiesAdapter.clear();
     }
 
     @Override
     public void onItemClick(View view, City city) {
-        // A stub
+        // A temporary stub
     }
 }

@@ -7,7 +7,7 @@ import io.realm.RealmConfiguration;
 import io.realm.rx.RealmObservableFactory;
 import there.we.go.openweather.di.AppComponent;
 import there.we.go.openweather.di.DaggerAppComponent;
-import there.we.go.openweather.di.NetworkModule;
+import there.we.go.openweather.di.AppModule;
 
 /**
  * @author Vladislav Falzan.
@@ -28,7 +28,7 @@ public class WeatherApp extends Application {
         Realm.setDefaultConfiguration(configuration);
 
         sAppComponent = DaggerAppComponent.builder()
-                .networkModule(new NetworkModule())
+                .appModule(new AppModule())
                 .build();
     }
 
