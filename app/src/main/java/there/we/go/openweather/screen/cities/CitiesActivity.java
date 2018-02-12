@@ -18,7 +18,7 @@ import there.we.go.openweather.screen.general.LoadingDialog;
 import there.we.go.openweather.screen.general.LoadingView;
 
 public class CitiesActivity extends MvpAppCompatActivity implements CitiesView, CitiesAdapter.OnItemClickListener {
-    // TODO: Inject Presenter
+    // TODO: RefreshLayout
     private LoadingView mLoadingView;
 
     @BindView(R.id.recyclerView)
@@ -41,8 +41,6 @@ public class CitiesActivity extends MvpAppCompatActivity implements CitiesView, 
         mRecyclerView.setAdapter(mCitiesAdapter);
 
         mLoadingView = LoadingDialog.view(getSupportFragmentManager());
-
-        mCitiesPresenter.init();
     }
 
     @Override

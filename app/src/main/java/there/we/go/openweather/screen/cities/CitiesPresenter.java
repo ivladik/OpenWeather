@@ -3,8 +3,12 @@ package there.we.go.openweather.screen.cities;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
+import org.reactivestreams.Subscription;
+
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import there.we.go.openweather.WeatherApp;
 import there.we.go.openweather.repository.CitiesRepository;
 
@@ -14,6 +18,8 @@ import there.we.go.openweather.repository.CitiesRepository;
 
 @InjectViewState
 public class CitiesPresenter extends MvpPresenter<CitiesView> {
+    // TODO: BasePresenter - move CompositeDisposable there
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     CitiesRepository mCitiesRepository;
@@ -22,12 +28,25 @@ public class CitiesPresenter extends MvpPresenter<CitiesView> {
         WeatherApp.getAppComponent().injectCitiesPresenter(this);
     }
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        init();
+    }
+
     public void init() {
-        mCitiesRepository.getCities()
-                .doOnSubscribe(subscription -> getViewState().showLoadingIndicator())
-                // TODO: subscription managing?
-                .doOnTerminate(getViewState()::hideLoadingIndicator)
-                .subscribe(getViewState()::showCities,
-                        throwable -> getViewState().showError());
+        Disposable disposable = mCitiesRepository.getCities()
+                        .doOnSubscribe(subscription -> getViewState().showLoadingIndicator())
+                        .doOnTerminate(getViewState()::hideLoadingIndicator)
+                        .subscribe(getViewState()::showCities,
+                                throwable -> getViewState().showError());
+
+        compositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 }
