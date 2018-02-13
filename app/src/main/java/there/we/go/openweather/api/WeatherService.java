@@ -4,6 +4,7 @@ import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import there.we.go.openweather.model.CitiesResponse;
+import there.we.go.openweather.model.ExtWeatherResponse;
 
 /**
  * @author Vladislav Falzan.
@@ -14,5 +15,5 @@ public interface WeatherService {
     Flowable<CitiesResponse> getCitiesWeather(@Query("id") String citiesIds);
 
     @GET("data/2.5/forecast?units=metric")
-    Flowable<CitiesResponse> getExtendedWeather(@Query("id") String cityId);
+    Flowable<ExtWeatherResponse> getExtendedWeather(@Query("id") String cityId);
 }

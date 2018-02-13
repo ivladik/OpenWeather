@@ -19,6 +19,9 @@ public class City extends RealmObject {
     @SerializedName("name")
     private String mName;
 
+    @SerializedName("dt")
+    private long mDateTime;
+
     @SerializedName("weather")
     private RealmList<Weather> mWeather;
 
@@ -66,5 +69,13 @@ public class City extends RealmObject {
 
     public void setWind(Wind mWind) {
         this.mWind = mWind;
+    }
+
+    public long getDateTime() {
+        return mDateTime;
+    }
+
+    public void setDateTime(long mDateTime) {
+        this.mDateTime = mDateTime;
     }
 }
