@@ -4,12 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * @author Vladislav Falzan.
  */
 
 public class City extends RealmObject {
+
+    @PrimaryKey
+    @SerializedName("id")
+    private int mId;
 
     @SerializedName("name")
     private String mName;
@@ -22,6 +27,10 @@ public class City extends RealmObject {
 
     @SerializedName("wind")
     private Wind mWind;
+
+    public int getId() {
+        return mId;
+    }
 
     public String getName() {
         return mName;
@@ -37,6 +46,10 @@ public class City extends RealmObject {
 
     public Wind getWind() {
         return mWind;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
     }
 
     public void setName(String mName) {

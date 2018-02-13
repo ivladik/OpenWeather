@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
 
 /**
- * Created by User on 02.02.2018.
+ * @author Vladislav Falzan.
  */
 
 public class Weather extends RealmObject {

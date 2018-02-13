@@ -14,4 +14,6 @@ public interface CitiesView extends LoadingView {
     void showCities(List<City> cities);
 
     void showError();
+
+    void openDetailsScreen(City city);
 }

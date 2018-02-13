@@ -17,11 +17,11 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesHolder> {
 
     private final List<City> mCities;
 
-    private final OnItemClickListener mOnItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
 
     private final View.OnClickListener mInternalListener = view -> {
         City city = (City) view.getTag();
-//        mOnItemClickListener.onItemClick(view, city);
+        mOnItemClickListener.onItemClick(city);
     };
 
     public CitiesAdapter(OnItemClickListener onItemClickListener) {
@@ -48,8 +48,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesHolder> {
     @Override
     public void onBindViewHolder(CitiesHolder holder, int position) {
         City city = mCities.get(position);
-        holder.bind(city);
 
+        holder.bind(city);
         holder.itemView.setOnClickListener(mInternalListener);
         holder.itemView.setTag(city);
     }
@@ -61,6 +61,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesHolder> {
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, City city);
+        void onItemClick(City city);
     }
 }

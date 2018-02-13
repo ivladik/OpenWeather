@@ -12,7 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import there.we.go.openweather.BuildConfig;
 import there.we.go.openweather.api.ApiKeyInterceptor;
-import there.we.go.openweather.api.CitiesService;
+import there.we.go.openweather.api.WeatherService;
 import there.we.go.openweather.repository.CitiesRepository;
 import there.we.go.openweather.repository.DefaultCitiesRepository;
 
@@ -25,14 +25,14 @@ public class AppModule {
     @Provides
     @Singleton
     CitiesRepository provideCitiesRepository(
-            CitiesService citiesService) {
-        return new DefaultCitiesRepository(citiesService);
+            WeatherService weatherService) {
+        return new DefaultCitiesRepository(weatherService);
     }
 
     @Provides
     @Singleton
-    CitiesService provideCitiesService(Retrofit retrofit) {
-        return retrofit.create(CitiesService.class);
+    WeatherService provideCitiesService(Retrofit retrofit) {
+        return retrofit.create(WeatherService.class);
     }
 
     @Provides

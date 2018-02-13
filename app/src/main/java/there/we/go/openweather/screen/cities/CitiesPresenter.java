@@ -3,13 +3,12 @@ package there.we.go.openweather.screen.cities;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
-import org.reactivestreams.Subscription;
-
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import there.we.go.openweather.WeatherApp;
+import there.we.go.openweather.model.City;
 import there.we.go.openweather.repository.CitiesRepository;
 
 /**
@@ -48,5 +47,9 @@ public class CitiesPresenter extends MvpPresenter<CitiesView> {
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.clear();
+    }
+
+    public void onItemClick(City city) {
+        getViewState().openDetailsScreen(city);
     }
 }

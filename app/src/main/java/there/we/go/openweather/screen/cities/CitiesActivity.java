@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import there.we.go.openweather.R;
 import there.we.go.openweather.model.City;
+import there.we.go.openweather.screen.details.DetailsActivity;
 import there.we.go.openweather.screen.general.LoadingDialog;
 import there.we.go.openweather.screen.general.LoadingView;
 
@@ -64,7 +65,12 @@ public class CitiesActivity extends MvpAppCompatActivity implements CitiesView, 
     }
 
     @Override
-    public void onItemClick(View view, City city) {
-        // A temporary stub
+    public void onItemClick(City city) {
+        mCitiesPresenter.onItemClick(city);
+    }
+
+    @Override
+    public void openDetailsScreen(City city) {
+        DetailsActivity.start(this, city);
     }
 }
