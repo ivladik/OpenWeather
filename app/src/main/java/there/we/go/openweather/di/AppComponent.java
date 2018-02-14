@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import there.we.go.openweather.screen.cities.CitiesPresenter;
+import there.we.go.openweather.screen.details.DetailsPresenter;
 
 /**
  * @author Vladislav Falzan.
@@ -14,4 +15,6 @@ import there.we.go.openweather.screen.cities.CitiesPresenter;
 public interface AppComponent {
 
     void injectCitiesPresenter(CitiesPresenter citiesPresenter);
+
+    void injectDetailsPresenter(DetailsPresenter detailsPresenter);
 }

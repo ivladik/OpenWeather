@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import there.we.go.openweather.WeatherApp;
 import there.we.go.openweather.model.City;
-import there.we.go.openweather.repository.CitiesRepository;
+import there.we.go.openweather.repository.WeatherRepository;
 
 /**
  * @author Vladislav Falzan.
@@ -18,10 +18,10 @@ import there.we.go.openweather.repository.CitiesRepository;
 @InjectViewState
 public class CitiesPresenter extends MvpPresenter<CitiesView> {
     // TODO: BasePresenter - move CompositeDisposable there
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     @Inject
-    CitiesRepository mCitiesRepository;
+    WeatherRepository mWeatherRepository;
 
     public CitiesPresenter() {
         WeatherApp.getAppComponent().injectCitiesPresenter(this);
@@ -33,20 +33,20 @@ public class CitiesPresenter extends MvpPresenter<CitiesView> {
         init();
     }
 
-    public void init() {
-        Disposable disposable = mCitiesRepository.getCities()
+    private void init() {
+        Disposable disposable = mWeatherRepository.getCitiesWeather()
                         .doOnSubscribe(subscription -> getViewState().showLoadingIndicator())
                         .doOnTerminate(getViewState()::hideLoadingIndicator)
                         .subscribe(getViewState()::showCities,
                                 throwable -> getViewState().showError());
 
-        compositeDisposable.add(disposable);
+        mCompositeDisposable.add(disposable);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        compositeDisposable.clear();
+        mCompositeDisposable.clear();
     }
 
     public void onItemClick(City city) {

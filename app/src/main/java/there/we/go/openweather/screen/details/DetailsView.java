@@ -1,5 +1,8 @@
 package there.we.go.openweather.screen.details;
 
+import java.util.List;
+
+import there.we.go.openweather.model.ExtWeather;
 import there.we.go.openweather.screen.general.LoadingView;
 
 /**
@@ -8,7 +11,7 @@ import there.we.go.openweather.screen.general.LoadingView;
 
 public interface DetailsView extends LoadingView {
 
-    void showDetails();
+    void showDetails(List<ExtWeather> extWeather);
 
     void showError();
 }

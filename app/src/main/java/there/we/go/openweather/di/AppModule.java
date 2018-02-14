@@ -13,8 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import there.we.go.openweather.BuildConfig;
 import there.we.go.openweather.api.ApiKeyInterceptor;
 import there.we.go.openweather.api.WeatherService;
-import there.we.go.openweather.repository.CitiesRepository;
-import there.we.go.openweather.repository.DefaultCitiesRepository;
+import there.we.go.openweather.repository.DefaultWeatherRepository;
+import there.we.go.openweather.repository.WeatherRepository;
 
 /**
  * @author Vladislav Falzan.
@@ -24,9 +24,9 @@ public class AppModule {
 
     @Provides
     @Singleton
-    CitiesRepository provideCitiesRepository(
+    WeatherRepository provideCitiesRepository(
             WeatherService weatherService) {
-        return new DefaultCitiesRepository(weatherService);
+        return new DefaultWeatherRepository(weatherService);
     }
 
     @Provides
