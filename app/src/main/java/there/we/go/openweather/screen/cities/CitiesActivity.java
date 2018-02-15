@@ -3,6 +3,7 @@ package there.we.go.openweather.screen.cities;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -30,11 +31,15 @@ public class CitiesActivity extends MvpAppCompatActivity implements CitiesView, 
     @InjectPresenter
     CitiesPresenter mCitiesPresenter;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
