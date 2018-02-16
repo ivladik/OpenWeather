@@ -13,5 +13,6 @@
         app:title="@string/app_name"
         app:titleTextColor="@color/white"
         android:theme="@style/ToolbarArrowBack"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_scrollFlags="scroll|enterAlways"/>
 </LinearLayout>

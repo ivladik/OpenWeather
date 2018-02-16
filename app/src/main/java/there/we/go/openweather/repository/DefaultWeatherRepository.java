@@ -29,7 +29,7 @@ public class DefaultWeatherRepository implements WeatherRepository {
 
     @Override
     public Flowable<List<City>> getCitiesWeather() {
-        return mWeatherService.getCitiesWeather(BuildConfig.API_CITIES_IDS)
+        return mWeatherService.getCitiesWeather(BuildConfig.API_CITIES_IDS) // TODO: move to input params
                 .map(CitiesResponse::getCities)
                 .flatMap(cities -> {
                     Realm.getDefaultInstance().executeTransaction(realm -> {
