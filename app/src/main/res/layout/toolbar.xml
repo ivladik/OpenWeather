@@ -12,6 +12,7 @@
         android:background="?attr/colorPrimary"
         app:title="@string/app_name"
         app:titleTextColor="@color/white"
+        app:layout_collapseMode="pin"
         android:theme="@style/ToolbarArrowBack"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_scrollFlags="scroll|enterAlways"/>

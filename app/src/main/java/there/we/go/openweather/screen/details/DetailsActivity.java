@@ -40,12 +40,6 @@ public class DetailsActivity extends MvpAppCompatActivity implements DetailsView
     @BindView(R.id.tvDayThree)
     TextView tvDayThree;
 
-    @BindView(R.id.tvDayFour)
-    TextView tvDayFour;
-
-    @BindView(R.id.tvDayFive)
-    TextView tvDayFive;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -86,8 +80,6 @@ public class DetailsActivity extends MvpAppCompatActivity implements DetailsView
         tvDayOne.setText(new Date(extWeather.get(0).getDateTime()).toString());
         tvDayTwo.setText(new Date(extWeather.get(5).getDateTime()).toString());
         tvDayThree.setText(new Date(extWeather.get(10).getDateTime()).toString());
-        tvDayFour.setText(new Date(extWeather.get(15).getDateTime()).toString());
-        tvDayFive.setText(new Date(extWeather.get(20).getDateTime()).toString());
     }
 
     @Override
@@ -95,8 +87,6 @@ public class DetailsActivity extends MvpAppCompatActivity implements DetailsView
         tvDayOne.setText("");
         tvDayTwo.setText("");
         tvDayThree.setText("");
-        tvDayFour.setText("");
-        tvDayFive.setText("");
     }
 
     @Override
