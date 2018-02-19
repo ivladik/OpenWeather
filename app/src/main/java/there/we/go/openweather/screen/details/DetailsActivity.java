@@ -23,7 +23,7 @@ import there.we.go.openweather.screen.general.LoadingDialog;
 import there.we.go.openweather.screen.general.LoadingView;
 
 public class DetailsActivity extends MvpAppCompatActivity implements DetailsView {
-    // TODO: rotate screen issue
+
     private static final String CITY_ID_KEY = "city_id_key";
 
     private LoadingView mLoadingView;
