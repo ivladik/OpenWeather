@@ -10,15 +10,14 @@ import io.reactivex.disposables.Disposable;
 import there.we.go.openweather.WeatherApp;
 import there.we.go.openweather.model.City;
 import there.we.go.openweather.repository.WeatherRepository;
+import there.we.go.openweather.widget.BasePresenter;
 
 /**
  * @author Vladislav Falzan.
  */
 
 @InjectViewState
-public class CitiesPresenter extends MvpPresenter<CitiesView> {
-    // TODO: BasePresenter - move CompositeDisposable there
-    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+public class CitiesPresenter extends BasePresenter<CitiesView> {
 
     @Inject
     WeatherRepository mWeatherRepository;
@@ -40,13 +39,7 @@ public class CitiesPresenter extends MvpPresenter<CitiesView> {
                         .subscribe(getViewState()::showCities,
                                 throwable -> getViewState().showError());
 
-        mCompositeDisposable.add(disposable);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mCompositeDisposable.clear();
+        unsubscribeOnDestroy(disposable);
     }
 
     public void onItemClick(City city) {

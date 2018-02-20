@@ -9,14 +9,14 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import there.we.go.openweather.WeatherApp;
 import there.we.go.openweather.repository.WeatherRepository;
+import there.we.go.openweather.widget.BasePresenter;
 
 /**
  * @author Vladislav Falzan.
  */
 @InjectViewState
-public class DetailsPresenter extends MvpPresenter<DetailsView> {
+public class DetailsPresenter extends BasePresenter<DetailsView> {
 
-    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     private String mCityId;
 
     public void setCityId(String cityId) {
@@ -43,13 +43,6 @@ public class DetailsPresenter extends MvpPresenter<DetailsView> {
                 .subscribe(getViewState()::showDetails,
                         throwable -> getViewState().showError());
 
-        mCompositeDisposable.add(disposable);
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mCompositeDisposable.clear();
+        unsubscribeOnDestroy(disposable);
     }
 }
