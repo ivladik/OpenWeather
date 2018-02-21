@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import butterknife.ButterKnife;
 import there.we.go.openweather.R;
 import there.we.go.openweather.model.City;
 import there.we.go.openweather.model.ExtWeather;
+import there.we.go.openweather.screen.details.adapters.DetailsHorizontalAdapter;
+import there.we.go.openweather.screen.details.adapters.DetailsVerticalAdapter;
 import there.we.go.openweather.screen.general.LoadingDialog;
 import there.we.go.openweather.screen.general.LoadingView;
 
@@ -31,17 +35,17 @@ public class DetailsActivity extends MvpAppCompatActivity implements DetailsView
     @InjectPresenter
     DetailsPresenter mDetailsPresenter;
 
-    @BindView(R.id.tvDayOne)
-    TextView tvDayOne;
-
-    @BindView(R.id.tvDayTwo)
-    TextView tvDayTwo;
-
-    @BindView(R.id.tvDayThree)
-    TextView tvDayThree;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.horizontalRV)
+    RecyclerView mHorizontalRecyclerView;
+
+    @BindView(R.id.verticalRV)
+    RecyclerView mVerticalRecyclerView;
+
+    DetailsHorizontalAdapter mHorizontalAdapter;
+    DetailsVerticalAdapter mVerticalAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,16 @@ public class DetailsActivity extends MvpAppCompatActivity implements DetailsView
         mDetailsPresenter.setCityId(getIntent().getStringExtra(CITY_ID_KEY)); // TODO: is it correct?
 
         mLoadingView = LoadingDialog.view(getSupportFragmentManager());
+
+        RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mHorizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
+        mHorizontalAdapter = new DetailsHorizontalAdapter();
+        mHorizontalRecyclerView.setAdapter(mHorizontalAdapter);
+
+        RecyclerView.LayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mVerticalRecyclerView.setLayoutManager(verticalLayoutManager);
+        mVerticalAdapter = new DetailsVerticalAdapter();
+        mVerticalRecyclerView.setAdapter(mVerticalAdapter);
     }
 
     public static void start(Activity activity, City city) {
@@ -76,17 +90,14 @@ public class DetailsActivity extends MvpAppCompatActivity implements DetailsView
 
     @Override
     public void showDetails(List<ExtWeather> extWeather) {
-        // TODO: RecyclerView
-        tvDayOne.setText(new Date(extWeather.get(0).getDateTime()).toString());
-        tvDayTwo.setText(new Date(extWeather.get(5).getDateTime()).toString());
-        tvDayThree.setText(new Date(extWeather.get(10).getDateTime()).toString());
+        mHorizontalAdapter.changeDataSet(extWeather);
+        mVerticalAdapter.changeDataSet(extWeather);
     }
 
     @Override
     public void showError() {
-        tvDayOne.setText("");
-        tvDayTwo.setText("");
-        tvDayThree.setText("");
+        mHorizontalAdapter.clear();
+        mVerticalAdapter.clear();
     }
 
     @Override
