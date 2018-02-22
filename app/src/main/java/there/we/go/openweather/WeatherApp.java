@@ -1,6 +1,7 @@
 package there.we.go.openweather;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -35,5 +36,10 @@ public class WeatherApp extends Application {
 
     public static AppComponent getAppComponent() {
         return sAppComponent;
+    }
+
+    @VisibleForTesting
+    public static void setAppComponent(AppComponent appComponent) {
+        sAppComponent = appComponent;
     }
 }
