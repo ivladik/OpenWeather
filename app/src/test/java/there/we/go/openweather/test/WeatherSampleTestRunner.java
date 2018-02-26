@@ -14,7 +14,7 @@ import there.we.go.openweather.BuildConfig;
 
 public class WeatherSampleTestRunner extends RobolectricTestRunner {
 
-    private static final int SDK_EMULATE_LEVEL = 23;
+    private static final int SDK_EMULATE_LEVEL = 21;
 
     public WeatherSampleTestRunner(Class<?> testClass) throws InitializationError {
         super(testClass);

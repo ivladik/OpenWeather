@@ -19,7 +19,7 @@ import there.we.go.openweather.model.ExtWeatherResponse;
  */
 
 public class DefaultWeatherRepository implements WeatherRepository {
-
+    // TODO: delete Repository, rename Service to Api, create WeatherService and move there.
     private final WeatherService mWeatherService;
 
     public DefaultWeatherRepository(WeatherService weatherService) {
